@@ -21,11 +21,28 @@
 - [新书介绍与书页展示（知乎）](https://zhuanlan.zhihu.com/p/2099226911767581717)
 - [作者介绍这本书（B站视频）](https://www.bilibili.com/video/BV1p5sf6NEUn/)
 
+## 目录
+
+[查看完整目录（PDF）](contents/table-of-contents.pdf)，提取自正式出版稿，共4页。
+
+## 样章
+
+以下为作者2026年11月2日修订版样章。
+
+| 主题 | 页数 | PDF |
+| --- | --- | --- |
+| 贝叶斯公式 | 11页 | [阅读或下载](samples/bayes-theorem.pdf) |
+| 指数分布 | 10页 | [阅读或下载](samples/exponential-distribution.pdf) |
+| 幂律分布 | 7页 | [阅读或下载](samples/power-law-distribution.pdf) |
+| 赌徒谬误与赌徒输光定理 | 7页 | [阅读或下载](samples/gamblers-fallacy-and-ruin.pdf) |
+| 信息熵 | 11页 | [阅读或下载](samples/information-entropy.pdf) |
+| 余弦相似度与大模型的底层逻辑 | 7页 | [阅读或下载](samples/cosine-similarity-and-llms.pdf) |
+
 ## 配套资料
 
-- [勘误](errata/README.md)
+- [勘误（后续更新）](errata/README.md)
 
-样章与Python实验文件将在核对后补充到本仓库。
+Python实验文件将在核对后补充到本仓库。
 
 ## 找到作者
 
