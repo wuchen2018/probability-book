@@ -40,7 +40,7 @@
 
 ## 配套资料
 
-- [勘误（后续更新）](errata/README.md)
+- [公开勘误完整版](errata/README.md)
 
 Python实验文件将在核对后补充到本仓库。
 
