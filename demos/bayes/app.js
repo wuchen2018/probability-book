@@ -6,7 +6,6 @@ const percent = value => `${(value * 100).toFixed(2)}%`;
 const defaults = { prior: 0.1, sensitivity: 99, 'false-positive': 1 };
 const values = { ...defaults };
 const delays = { 1: 9000, 2: 12000, 3: 9000 };
-const smallScreen = matchMedia('(max-width: 700px)');
 let step = 2;
 let mode = 'experiment';
 let playing = false;
@@ -49,14 +48,19 @@ function render() {
   $('step-copy').hidden = experiment;
   $('back-to-experiment').hidden = experiment;
   $('step-navigation').hidden = experiment;
+  $('interaction-region').hidden = !experiment;
   $('experiment-controls').hidden = !experiment;
-  $('mobile-result-summary').hidden = !experiment || !smallScreen.matches;
+  $('mobile-result-summary').hidden = !experiment;
   $('lesson-actions').hidden = experiment;
   $('experiment-actions').hidden = !experiment;
   $('playback-settings').hidden = experiment;
   $('after-lesson').hidden = !experiment && step !== 4;
   $('population').hidden = experiment || step > 2;
   $('groups').hidden = !experiment && step === 4;
+  $('counts-title').hidden = !experiment;
+  $('counts-intro').hidden = !experiment;
+  for (const id of ['sick-derivation', 'healthy-derivation']) $(id).hidden = !experiment && step > 2;
+  for (const id of ['sick-explanation', 'healthy-explanation']) $(id).hidden = !experiment;
   for (const id of ['sick-origin', 'healthy-origin', 'sick-source', 'healthy-source']) $(id).hidden = onlyPositive;
   $('sick-results').hidden = !experiment && step === 1;
   $('healthy-results').hidden = !experiment && step === 1;
@@ -66,6 +70,12 @@ function render() {
 
   put('sick-count', c.sick); put('healthy-count', c.healthy);
   put('tp-count', c.truePositive); put('fp-count', c.falsePositive);
+  $('population-explanation').textContent = `患病率是${values.prior}%，也就是每1000人中约有${number(values.prior * 10)}人患病。放到这10万人中，就是100,000×${values.prior}%=${number(c.sick)}名患者，剩下${number(c.healthy)}人没有患病。`;
+  $('counts-intro').textContent = `先按患病比例把10万人分成患者和健康人，再分别对这两组人做检测。下面每一组都写出起始人数、检测比例和阳性人数。${[c.sick,c.healthy,c.truePositive,c.falsePositive].some(n=>Math.abs(n-Math.round(n))>1e-8) ? '这里按比例计算平均人数；人数带小数，表示多次同样检测的平均结果。' : ''}`;
+  $('sick-derivation').textContent = `先算患者人数：100,000×${values.prior}%=${number(c.sick)}人。`;
+  $('healthy-derivation').textContent = `其余人没有患病：100,000−${number(c.sick)}=${number(c.healthy)}人。`;
+  $('sick-explanation').textContent = `这${number(c.sick)}名患者中，有${values.sensitivity}%会测出阳性，所以得到${number(c.truePositive)}人。他们确实患病，也测出阳性，叫“真阳性”；另外${number(c.falseNegative)}人测出阴性。`;
+  $('healthy-explanation').textContent = `这${number(c.healthy)}名健康人中，有${values['false-positive']}%会被误判为阳性，所以得到${number(c.falsePositive)}人。他们没有患病，却测出阳性，叫“假阳性”；另外${number(c.trueNegative)}人测出阴性。`;
   $('sick-label').textContent = onlyPositive ? '确实患病，也测出阳性' : '实际患病';
   $('healthy-label').textContent = onlyPositive ? '没有患病，却测出阳性' : '没有患病';
   $('sick-rate').textContent = `其中${values.sensitivity}%测出阳性`;
@@ -101,13 +111,15 @@ function render() {
   $('denominator').textContent = `${number(c.truePositive)} + ${number(c.falsePositive)}`;
   $('posterior').textContent = c.posterior === null ? '无法计算' : percent(c.posterior);
   $('summary-posterior').textContent = $('posterior').textContent;
-  $('summary-tp').textContent = `真阳性 ${number(c.truePositive)}人`;
-  $('summary-fp').textContent = `假阳性 ${number(c.falsePositive)}人`;
+  $('summary-tp').textContent = `患者测出阳性：${number(c.truePositive)}人`;
+  $('summary-fp').textContent = `健康人被误判：${number(c.falsePositive)}人`;
+  $('positive-total-explanation').textContent = c.positive === 0 ? '两组阳性人数都是0，0＋0＝0。这组参数下没有人测出阳性，无法继续计算阳性后患病的概率。' : `把上面两组阳性的人加起来：${number(c.truePositive)}名患者＋${number(c.falsePositive)}名被误判的健康人＝${number(c.positive)}人。我们已经知道检测结果是阳性，接下来只看这${number(c.positive)}人中，有多少人确实患病。`;
   $('approximately').hidden = c.posterior === null;
   document.querySelector('.answer-equation').setAttribute('aria-label', c.posterior === null ? '阳性人数为0，分母为0，无法计算。' : `${number(c.truePositive)}名真阳性，除以全部${number(c.positive)}名阳性，约为${percent(c.posterior)}。`);
   $('answer-explanation').textContent = c.posterior === null
     ? '按这组参数，没有人测出阳性。分母是0，阳性后患病的概率无法计算。'
-    : `${number(c.positive)}人测出阳性，其中${number(c.truePositive)}人确实患病。所以，测出阳性后患病的概率约为${percent(c.posterior)}。`;
+    : `在这${number(c.positive)}名阳性的人中，确实患病的是${number(c.truePositive)}人。用${number(c.truePositive)}除以${number(c.positive)}，得到${percent(c.posterior)}。这就是测出阳性后患病的概率。`;
+  $('denominator-explanation').querySelector('summary').textContent = `“患者中有${values.sensitivity}%测出阳性”和“阳性后患病的概率”，分母为什么不同？`;
   document.querySelector('.positive-composition').hidden = c.posterior === null;
   $('true-share').style.width = `${(c.posterior ?? 0) * 100}%`;
   $('false-share').style.width = `${c.posterior === null ? 0 : (1 - c.posterior) * 100}%`;
@@ -116,7 +128,7 @@ function render() {
   $('positive-bar').setAttribute('aria-label', c.posterior === null ? '没有阳性结果' : `测出阳性的${number(c.positive)}人中，${number(c.truePositive)}人确实患病，占${percent(c.posterior)}；${number(c.falsePositive)}人没有患病。`);
   $('comparison-explanation').textContent = `“能查出${values.sensitivity}%的患者”，先选中已经患病的人，再看检测结果。“阳性后患病的概率”先选中已经测出阳性的人，再看谁患病。前者的分母是全部患者，后者的分母是全部阳性的人。`;
   $('expanded-calculation').textContent = `真阳性人数：100,000 × ${values.prior}% × ${values.sensitivity}% = ${number(c.truePositive)}人。假阳性人数：100,000 × ${number(100 - values.prior)}% × ${values['false-positive']}% = ${number(c.falsePositive)}人。`;
-  $('current-method').textContent = `当前检测方法：${values.sensitivity}%的患者会测出阳性，${values['false-positive']}%的健康人会被误判为阳性。`;
+  $('current-method').textContent = `当前设置：${values.sensitivity}%的患者会测出阳性，${values['false-positive']}%的健康人会被误判为阳性。`;
   playbackLabel();
 }
 
@@ -161,7 +173,7 @@ document.querySelectorAll('#step-navigation [data-step]').forEach(button => butt
 $('previous-step').addEventListener('click', () => setStep(step - 1));
 $('next-step').addEventListener('click', () => {
   if (step < 4) { setStep(step + 1); return; }
-  stop(); mode = 'experiment'; $('playback-settings').open = false; render(); scrollToLesson();
+  stop(); mode = 'experiment'; render(); scrollToLesson();
 });
 $('autoplay').addEventListener('click', () => {
   if (playing) { stop(); return; }
@@ -174,12 +186,11 @@ $('playback-settings').addEventListener('toggle', () => { if (!$('playback-setti
 $('book-example').addEventListener('click', () => { Object.assign(values, defaults); sync(); });
 $('higher-prior').addEventListener('click', () => { values.prior = 10; sync(); });
 $('back-to-lesson').addEventListener('click', () => {
-  stop(); mode = 'lesson'; step = 1; $('method-settings').open = false; sync(); scrollToLesson();
+  stop(); mode = 'lesson'; step = 1; sync(); scrollToLesson();
 });
 $('back-to-experiment').addEventListener('click', () => {
-  stop(); mode = 'experiment'; step = 2; $('playback-settings').open = false; render(); scrollToLesson();
+  stop(); mode = 'experiment'; step = 2; render(); scrollToLesson();
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
-smallScreen.addEventListener('change', render);
 render();
 document.documentElement.dataset.labReady = 'true';
