@@ -44,21 +44,27 @@ function render() {
   $('groups').hidden = step === 4;
   $('sick-origin').hidden = step === 3;
   $('healthy-origin').hidden = step === 3;
+  $('sick-source').hidden = step === 3;
+  $('healthy-source').hidden = step === 3;
   $('sick-results').hidden = step === 1;
   $('healthy-results').hidden = step === 1;
-  for (const id of ['sick-calculation', 'healthy-calculation', 'sick-negative', 'healthy-negative', 'tp-label', 'fp-label']) $(id).hidden = step !== 2;
+  for (const id of ['sick-transform', 'healthy-transform', 'sick-negative', 'healthy-negative']) $(id).hidden = step !== 2;
   $('answer').hidden = step !== 4;
 
   put('sick-count', c.sick); put('healthy-count', c.healthy);
   put('tp-count', c.truePositive); put('fp-count', c.falsePositive);
   $('sick-label').textContent = step === 3 ? '确实患病，也测出阳性' : '实际患病';
   $('healthy-label').textContent = step === 3 ? '没有患病，却测出阳性' : '没有患病';
-  $('sick-calculation').textContent = `${number(c.sick)} × ${values.sensitivity}% = ${number(c.truePositive)}`;
-  $('healthy-calculation').textContent = `${number(c.healthy)} × ${values['false-positive']}% = ${number(c.falsePositive)}`;
-  $('tp-note').textContent = step === 3 ? `从${number(c.sick)}名患者中测出` : '确实患病，也测出阳性，叫“真阳性”。';
-  $('fp-note').textContent = step === 3 ? `从${number(c.healthy)}名健康人中测出` : '没有患病，却测出阳性，叫“假阳性”。';
-  $('sick-negative').textContent = `其余${number(c.falseNegative)}人测出阴性`;
-  $('healthy-negative').textContent = `其余${number(c.trueNegative)}人测出阴性`;
+  $('sick-rate').textContent = `其中${values.sensitivity}%测出阳性`;
+  $('healthy-rate').textContent = `其中${values['false-positive']}%被误判`;
+  $('sick-calculation').textContent = `${number(c.sick)}×${values.sensitivity}%=${number(c.truePositive)}`;
+  $('healthy-calculation').textContent = `${number(c.healthy)}×${values['false-positive']}%=${number(c.falsePositive)}`;
+  $('tp-label').textContent = step === 3 ? '确实患病，也测出阳性' : '测出阳性';
+  $('fp-label').textContent = step === 3 ? '没有患病，却测出阳性' : '被误判为阳性';
+  $('tp-note').textContent = step === 3 ? `真阳性 · 从${number(c.sick)}名患者中测出` : '真阳性';
+  $('fp-note').textContent = step === 3 ? `假阳性 · 从${number(c.healthy)}名健康人中测出` : '假阳性';
+  $('sick-negative').textContent = `这${number(c.sick)}名患者中，另外${number(c.falseNegative)}人测出阴性。`;
+  $('healthy-negative').textContent = `这${number(c.healthy)}名健康人中，另外${number(c.trueNegative)}人测出阴性。`;
   $('scene-note').textContent = step === 1 ? '两组人数相加，仍然是最开始的10万人。' : step === 2 ? '两组人里都出现了阳性。下一步，我们只看这些阳性的人。' : step === 3 ? '阴性的人退出计算。接下来，只把这两组阳性的人加起来。' : '';
 
   const titles = ['先把10万人分成两组', '给两组人做检测', '现在，只看测出阳性的人', '分母只数测出阳性的人'];

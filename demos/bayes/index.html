@@ -6,9 +6,9 @@
   <meta name="description" content="沿用《大白话概率论》的10万人检测例子，一步一步数清真阳性、假阳性，再改变患病率观察结果。">
   <meta name="theme-color" content="#14523f">
   <title>检测阳性，患病的概率就是99%吗？｜武辰的交互实验</title>
-  <link rel="stylesheet" href="lab.css?v=20261121-space">
+  <link rel="stylesheet" href="lab.css?v=20261121-flow">
   <link rel="icon" href="data:,">
-  <script type="module" src="app.js?v=20261121-space"></script>
+  <script type="module" src="app.js?v=20261121-flow"></script>
 </head>
 <body>
   <a class="skip" href="#lesson">跳到实验</a>
@@ -17,11 +17,14 @@
     <a href="https://github.com/wuchen2018/probability-book">《大白话概率论》</a>
   </header>
   <main id="main">
-    <section class="intro reading-width" aria-labelledby="page-title">
-      <p class="eyebrow">条件概率 · 贝叶斯公式</p>
-      <h1 id="page-title">检测阳性，<br>患病的概率就是99%吗？</h1>
+    <section class="intro shell" aria-labelledby="page-title">
+      <div class="book-reference">
+        <div><p>《大白话概率论》 · 第3章 条件概率与贝叶斯公式</p><p><strong>第3.4节 贝叶斯公式</strong> · 纸书第77—88页</p></div>
+        <a href="../../samples/bayes-theorem.pdf" id="sample-link">阅读公开样章（PDF）</a>
+      </div>
+      <h1 id="page-title">检测阳性，患病的概率就是99%吗？</h1>
       <p class="lead">假设一种病的患病率是 <strong>0.1%</strong>。检测能查出 <strong>99%</strong> 的患者，也会把 <strong>1%</strong> 的健康人误判为阳性。</p>
-      <p>张三测出了阳性，他患病的概率是多少？<br>我们先让<strong>10万人</strong>参加检测，把人数一步一步数清楚。</p>
+      <p>张三测出了阳性，他患病的概率是多少？我们让<strong>10万人</strong>参加检测，把人数一步一步数清楚。</p>
     </section>
     <section class="lesson shell" id="lesson" aria-label="贝叶斯检测实验">
       <nav id="step-navigation" class="step-navigation" aria-label="选择讲解步骤">
@@ -68,24 +71,18 @@
         <div class="population" id="population"><span>参加检测</span><strong>100,000<span class="unit">人</span></strong></div>
         <div class="groups" id="groups">
           <section class="group sick-group" aria-labelledby="sick-label">
-            <h3 id="sick-label">实际患病</h3>
-            <p class="group-count" id="sick-origin"><strong id="sick-count"></strong><span class="unit">人</span></p>
+            <div class="group-source" id="sick-source"><h3 id="sick-label">实际患病</h3><p class="group-count" id="sick-origin"><strong id="sick-count"></strong><span class="unit">人</span></p></div>
             <div class="detection" id="sick-results" hidden>
-              <p class="calculation-line" id="sick-calculation"></p>
-              <p class="positive-name" id="tp-label">其中测出阳性</p>
-              <p class="positive-count"><strong id="tp-count"></strong><span class="unit">人</span></p>
-              <p class="positive-note" id="tp-note"></p>
+              <div class="flow-transform" id="sick-transform"><p class="flow-rate" id="sick-rate"></p><span class="flow-arrow" aria-hidden="true"></span><p class="calculation-line" id="sick-calculation"></p></div>
+              <div class="group-result"><p class="positive-name" id="tp-label">测出阳性</p><p class="positive-count"><strong id="tp-count"></strong><span class="unit">人</span></p><p class="positive-note" id="tp-note"></p></div>
               <p class="negative" id="sick-negative"></p>
             </div>
           </section>
           <section class="group healthy-group" aria-labelledby="healthy-label">
-            <h3 id="healthy-label">没有患病</h3>
-            <p class="group-count" id="healthy-origin"><strong id="healthy-count"></strong><span class="unit">人</span></p>
+            <div class="group-source" id="healthy-source"><h3 id="healthy-label">没有患病</h3><p class="group-count" id="healthy-origin"><strong id="healthy-count"></strong><span class="unit">人</span></p></div>
             <div class="detection" id="healthy-results" hidden>
-              <p class="calculation-line" id="healthy-calculation"></p>
-              <p class="positive-name" id="fp-label">其中被误判为阳性</p>
-              <p class="positive-count"><strong id="fp-count"></strong><span class="unit">人</span></p>
-              <p class="positive-note" id="fp-note"></p>
+              <div class="flow-transform" id="healthy-transform"><p class="flow-rate" id="healthy-rate"></p><span class="flow-arrow" aria-hidden="true"></span><p class="calculation-line" id="healthy-calculation"></p></div>
+              <div class="group-result"><p class="positive-name" id="fp-label">被误判为阳性</p><p class="positive-count"><strong id="fp-count"></strong><span class="unit">人</span></p><p class="positive-note" id="fp-note"></p></div>
               <p class="negative" id="healthy-negative"></p>
             </div>
           </section>
