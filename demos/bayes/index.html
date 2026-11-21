@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="沿用《大白话概率论》的10万人检测例子，分三步看清贝叶斯公式，改变患病率后观察结果。">
+  <meta name="theme-color" content="#14523f">
+  <title>检测阳性，患病的概率就是99%吗？｜武辰的交互实验</title>
+  <link rel="stylesheet" href="lab.css">
+  <link rel="icon" href="data:,">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到实验</a>
+  <header class="shell masthead">
+    <a class="brand" href="https://wuchen2018.pages.dev/"><span class="stamp" aria-hidden="true">武</span>武辰的交互实验</a>
+    <a href="https://github.com/wuchen2018/probability-book">《大白话概率论》</a>
+  </header>
+  <main id="main" class="shell">
+    <section class="intro">
+      <p class="eyebrow">条件概率 · 贝叶斯公式</p>
+      <h1>检测阳性，<br class="mobile-break">患病的概率就是99%吗？</h1>
+      <p class="lead">假设一种病在人群中的患病率是 <strong>0.1%</strong>。检测能查出 <strong>99%</strong> 的患者，也会把 <strong>1%</strong> 的健康人误判为阳性。张三测出了阳性，他患病的概率是多少？</p>
+      <p>先不用公式。我们让 <strong>10万人</strong>参加检测，数一数测出阳性的人里，到底有多少人患病。</p>
+    </section>
+    <div class="experiment-grid">
+      <aside class="controls" aria-labelledby="controls-title">
+        <h2 id="controls-title">换一群人，结果会怎样？</h2>
+        <p class="help">先按书中的数值看完三步，再把患病率调高。检测方法相同，只换参加检测的人群。</p>
+        <div class="presets">
+          <button type="button" id="book-example">书中的例子</button>
+          <button type="button" id="higher-prior">患病率换成10%</button>
+        </div>
+        <div class="field">
+          <label for="prior">人群中实际患病的比例</label>
+          <div class="number-line"><input id="prior-number" type="number" min="0" max="100" step="0.1" value="0.1" aria-label="人群中实际患病的比例，百分比"><span>%</span></div>
+          <input id="prior" type="range" min="0" max="100" step="0.1" value="0.1">
+          <p class="help">这就是“患病率”。0.1%表示每1000人中约有1人患病。</p>
+        </div>
+        <details class="advanced">
+          <summary>也改变检测方法</summary>
+          <div class="field">
+            <label for="sensitivity">患病的人，有多少会测出阳性？</label>
+            <div class="number-line"><input id="sensitivity-number" type="number" min="0" max="100" step="0.1" value="99" aria-label="患者测出阳性的比例，百分比"><span>%</span></div>
+            <input id="sensitivity" type="range" min="0" max="100" step="0.1" value="99">
+            <p class="help">这个比例叫“灵敏度”。</p>
+          </div>
+          <div class="field">
+            <label for="false-positive">健康的人，有多少会被误判为阳性？</label>
+            <div class="number-line"><input id="false-positive-number" type="number" min="0" max="100" step="0.1" value="1" aria-label="健康人被误判为阳性的比例，百分比"><span>%</span></div>
+            <input id="false-positive" type="range" min="0" max="100" step="0.1" value="1">
+            <p class="help">这个比例叫“假阳性率”。</p>
+          </div>
+        </details>
+        <p id="input-error" class="error" role="status"></p>
+        <p class="fine">这里按比例计算平均人数。人数带小数时，表示多次同样检测的平均结果。</p>
+      </aside>
+      <section class="workspace" aria-label="分三步计算">
+        <div class="step-tabs" role="group" aria-label="选择讲解步骤">
+          <button type="button" data-step="1" aria-pressed="true">先看这10万人</button>
+          <button type="button" data-step="2" aria-pressed="false">再做检测</button>
+          <button type="button" data-step="3" aria-pressed="false">只看阳性的人</button>
+        </div>
+        <div class="step-copy" aria-live="polite"><h2 id="step-title"></h2><p id="step-description"></p></div>
+        <div class="population"><span>参加检测</span><strong>100,000<span class="unit">人</span></strong></div>
+        <div class="groups">
+          <section class="group sick-group" aria-labelledby="sick-label">
+            <h3 id="sick-label">实际患病</h3><p class="group-count"><span id="sick-count"></span><span class="unit">人</span></p>
+            <div class="outcomes" id="sick-results" hidden>
+              <div class="outcome positive true-positive"><span>测出阳性</span><strong id="tp-count"></strong><span>人 · 真阳性</span></div>
+              <div class="outcome negative"><span>测出阴性</span><strong id="fn-count"></strong><span>人 · 漏检</span></div>
+            </div>
+          </section>
+          <section class="group healthy-group" aria-labelledby="healthy-label">
+            <h3 id="healthy-label">没有患病</h3><p class="group-count"><span id="healthy-count"></span><span class="unit">人</span></p>
+            <div class="outcomes" id="healthy-results" hidden>
+              <div class="outcome positive false-positive"><span>测出阳性</span><strong id="fp-count"></strong><span>人 · 假阳性</span></div>
+              <div class="outcome negative"><span>测出阴性</span><strong id="tn-count"></strong><span>人 · 正确排除</span></div>
+            </div>
+          </section>
+        </div>
+        <section id="answer" class="answer" hidden aria-labelledby="answer-title">
+          <h3 id="answer-title">阳性的人里，有多少人确实患病？</h3>
+          <div class="answer-equation"><span class="fraction"><span id="numerator"></span><span id="denominator"></span></span><span>≈</span><strong id="posterior"></strong></div>
+          <div id="positive-bar" class="composition" role="img"><span id="true-share"></span><span id="false-share"></span></div>
+          <div class="legend"><span class="true-label" id="true-legend"></span><span class="false-label" id="false-legend"></span></div>
+          <p id="answer-explanation"></p>
+          <details class="calculation"><summary>把刚才的人数写成公式</summary><p>分子只数“实际患病，而且测出阳性”的人；分母把两组测出阳性的人加起来。</p><p class="formula">阳性后患病的概率 = 真阳性人数 ÷（真阳性人数 + 假阳性人数）</p><p id="expanded-calculation"></p></details>
+        </section>
+        <div class="playback"><button type="button" class="primary" id="next-step">下一步：做检测</button><button type="button" id="autoplay">自动演示</button></div>
+      </section>
+    </div>
+    <section class="takeaway"><h2>99%和我们求的概率，分母不同</h2><p>“能查出99%的患者”先选中<strong>已经患病的人</strong>，再看检测结果。张三的问题先选中<strong>已经测出阳性的人</strong>，再看谁患病。你在上面的第三步换了分母，也就把这两个问题分清了。</p></section>
+  </main>
+  <footer class="shell footer"><p>配套《大白话概率论》第3.4节 · 武辰</p><nav><a href="https://github.com/wuchen2018/probability-book/tree/main/demos/bayes">查看源码</a><a href="https://wuchen2018.github.io/llm-engineer-book/demos/softmax/">试试Softmax与采样</a></nav></footer>
+</body>
+</html>
