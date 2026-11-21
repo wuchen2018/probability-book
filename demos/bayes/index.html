@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="沿用《大白话概率论》的10万人检测例子，一步一步数清真阳性、假阳性，再改变患病率观察结果。">
+  <meta name="description" content="沿用《大白话概率论》的10万人检测例子，自定义患病比例，即时查看人数、检测计算和阳性后患病的概率。">
   <meta name="theme-color" content="#14523f">
   <title>检测阳性，患病的概率就是99%吗？｜武辰的交互实验</title>
-  <link rel="stylesheet" href="lab.css?v=20261121-flow">
+  <link rel="stylesheet" href="lab.css?v=20261121-live">
   <link rel="icon" href="data:,">
-  <script type="module" src="app.js?v=20261121-flow"></script>
+  <script type="module" src="app.js?v=20261121-live"></script>
 </head>
 <body>
   <a class="skip" href="#lesson">跳到实验</a>
@@ -23,17 +23,17 @@
         <a href="../../samples/bayes-theorem.pdf" id="sample-link">阅读公开样章（PDF）</a>
       </div>
       <h1 id="page-title">检测阳性，患病的概率就是99%吗？</h1>
-      <p class="lead">假设一种病的患病率是 <strong>0.1%</strong>。检测能查出 <strong>99%</strong> 的患者，也会把 <strong>1%</strong> 的健康人误判为阳性。</p>
-      <p>张三测出了阳性，他患病的概率是多少？我们让<strong>10万人</strong>参加检测，把人数一步一步数清楚。</p>
+      <p class="lead">让<strong>10万人</strong>参加检测。你可以改动下面的患病比例，看看有多少患者测出阳性、多少健康人被误判，以及最后的患病概率。</p>
     </section>
-    <section class="lesson shell" id="lesson" aria-label="贝叶斯检测实验">
-      <nav id="step-navigation" class="step-navigation" aria-label="选择讲解步骤">
+    <section class="lesson shell" id="lesson" data-mode="experiment" aria-label="贝叶斯检测实验">
+      <button type="button" class="quiet mode-return" id="back-to-experiment" hidden>返回交互实验，自己改参数</button>
+      <nav id="step-navigation" class="step-navigation" aria-label="选择讲解步骤" hidden>
         <button type="button" data-step="1" aria-current="step"><span class="step-number">1</span>分人群</button>
         <button type="button" data-step="2"><span class="step-number">2</span>做检测</button>
         <button type="button" data-step="3"><span class="step-number">3</span>只看阳性</button>
         <button type="button" data-step="4"><span class="step-number">4</span>算概率</button>
       </nav>
-      <header class="step-copy reading-width" aria-live="polite" aria-atomic="true">
+      <header class="step-copy reading-width" id="step-copy" aria-live="polite" aria-atomic="true" hidden>
         <p id="step-label" class="eyebrow">第1步 / 共4步</p>
         <h2 id="step-title">先把10万人分成两组</h2>
         <p id="step-description">患病率是0.1%，也就是每1000人中约有1人患病。10万人中，约100人患病，另外99,900人没有患病。</p>
@@ -42,7 +42,7 @@
         <span class="summary-probability"><span>阳性后患病概率</span><strong id="summary-posterior"></strong></span>
         <span class="summary-counts"><span id="summary-tp"></span><span id="summary-fp"></span></span>
       </output>
-      <section id="experiment-controls" class="experiment-controls reading-width" aria-label="自己改变检测参数" hidden>
+      <section id="experiment-controls" class="experiment-controls reading-width" aria-label="自己改变检测参数">
         <div class="prior-field">
           <label for="prior">人群中实际患病的比例</label>
           <div class="number-line"><input id="prior-number" type="number" min="0" max="100" step="0.1" value="0.1" aria-label="人群中实际患病的比例，百分比"><span>%</span></div>
@@ -101,12 +101,12 @@
           </div>
         </section>
       </div>
-      <div class="lesson-actions" id="lesson-actions">
+      <div class="lesson-actions" id="lesson-actions" hidden>
         <button type="button" id="previous-step" class="quiet" disabled>上一步</button>
         <button type="button" class="primary" id="next-step">下一步：做检测</button>
       </div>
-      <div id="experiment-actions" class="experiment-actions" hidden><button type="button" id="back-to-lesson" class="quiet">回到书中的讲解</button></div>
-      <details class="playback-settings reading-width" id="playback-settings">
+      <div id="experiment-actions" class="experiment-actions"><button type="button" id="back-to-lesson" class="quiet">分四步看计算过程</button></div>
+      <details class="playback-settings reading-width" id="playback-settings" hidden>
         <summary>自动播放</summary>
         <div class="playback-controls"><button type="button" id="autoplay">开始自动播放</button><label for="pace">播放速度<select id="pace"><option value="1">正常</option><option value="1.5">慢一些</option><option value="2">更慢</option></select></label></div>
         <p class="help">每一步会停下来，让你看清人数和计算。你可以随时暂停，也可以自己点“下一步”。</p>
