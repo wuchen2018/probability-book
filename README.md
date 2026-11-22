@@ -12,9 +12,9 @@
 
 ## 在线交互实验
 
-[检测阳性，患病的概率就是99%吗？](https://wuchen2018.github.io/probability-book/demos/bayes/)
+[三门问题：只剩两扇关着的门，你换不换？](https://wuchen2018.github.io/probability-book/demos/monty-hall/)
 
-沿用第3.4节的10万人检测例子，打开就能改变患病比例，人数、计算过程和最终概率会即时更新；也可以分四步看计算过程。不用安装Python。[实验源码](demos/bayes/)
+先选一扇门，等主持人打开空门后，再决定坚持还是换门。你可以把三扇门改成十扇门，也可以让电脑连玩1,000局，比较两种选择各能赢多少。[实验源码](demos/monty-hall/)
 
 ## 这本书是怎么讲的
 
