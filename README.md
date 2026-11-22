@@ -12,6 +12,10 @@
 
 ## 在线交互实验
 
+[抛硬币：次数多了，正面比例会怎样变化？](https://wuchen2018.github.io/probability-book/demos/large-numbers/)
+
+点“再抛100次”或“快进到10000次”，看四组正面比例怎样变化；也可以把正面概率从50%改成80%，比较公平硬币和偏心硬币。[实验源码](demos/large-numbers/)
+
 [三门问题：只剩两扇关着的门，你换不换？](https://wuchen2018.github.io/probability-book/demos/monty-hall/)
 
 先选一扇门，等主持人打开空门后，再决定坚持还是换门。你可以把三扇门改成十扇门，也可以让电脑连玩1,000局，比较两种选择各能赢多少。[实验源码](demos/monty-hall/)
