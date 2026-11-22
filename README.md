@@ -10,6 +10,10 @@
 
 [目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
 
+## 配套视频
+
+[条件概率：知道是偶数之后（骰子动画，1分39秒）](https://wuchen2018.github.io/probability-book/videos/conditional-probability-dice/)
+
 ## 在线交互实验
 
 [抛硬币：次数多了，正面比例会怎样变化？](https://wuchen2018.github.io/probability-book/demos/large-numbers/)
