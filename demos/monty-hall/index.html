@@ -179,4 +179,6 @@ function refresh(){if(render)render(states);}window.Lab={$,f,pct,esc,plot,bind,s
   $('simulate').onclick = () => { simulationSeed++; batchNumber++; batch = M.simulateMonty(n, 1000, simulationSeed); L.refresh(); };
   $('try-ten').onclick = () => L.set({ doors: 10 }); $('try-three').onclick = () => L.set({ doors: 3 });
 })();
-</script></body></html>
+</script>
+<!-- wc-feedback:begin --><script data-wc-feedback-bootstrap>(function(){if(location.protocol!=="https:"||!["https://wuchen2018.github.io","https://wuchen2018.pages.dev"].includes(location.origin))return;var c={"origins":["https://wuchen2018.github.io","https://wuchen2018.pages.dev"],"api":"https://wuchen-reader-feedback.qyaazz.workers.dev/api/feedback","targets":[{"content_id":"probability:monty-hall","version":"870d9b2d8df7257e","title":"三门问题","kind":"interactive","source_url":"https://wuchen2018.github.io/probability-book/demos/monty-hall/"}]};var s=document.createElement("script");s.src="https://wuchen-reader-feedback.qyaazz.workers.dev/feedback/widget.js?v=3deccd21347f6f32";s.dataset.feedback=JSON.stringify(c);document.body.appendChild(s);})();</script><!-- wc-feedback:end -->
+</body></html>
