@@ -10,20 +10,6 @@
 
 [目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
 
-## 配套视频
-
-[条件概率：知道是偶数之后（骰子动画，1分39秒）](https://wuchen2018.github.io/probability-book/videos/conditional-probability-dice/)
-
-## 在线交互实验
-
-[抛硬币：次数多了，正面比例会怎样变化？](https://wuchen2018.github.io/probability-book/demos/large-numbers/)
-
-点“再抛100次”或“快进到10000次”，看四组正面比例怎样变化；也可以把正面概率从50%改成80%，比较公平硬币和偏心硬币。[实验源码](demos/large-numbers/)
-
-[三门问题：只剩两扇关着的门，你换不换？](https://wuchen2018.github.io/probability-book/demos/monty-hall/)
-
-先选一扇门，等主持人打开空门后，再决定坚持还是换门。你可以把三扇门改成十扇门，也可以让电脑连玩1,000局，比较两种选择各能赢多少。[实验源码](demos/monty-hall/)
-
 ## 这本书是怎么讲的
 
 我自学概率论的时候，最怕的就是教材跳步。公式明明每一行都看得懂，上一行怎么变成下一行的，却要自己琢磨很久，有时候琢磨半天也想不通，只好先背下来。所以写这本书时，我给自己定了一个要求：**用大白话讲，不跳步**。每写一段，我都会想，读者读到这里会不会卡住？如果会，那就多写几句。书因此厚了一些，但我宁愿多说一句，也不想让你卡在我省掉的那一步上。
