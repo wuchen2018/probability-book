@@ -10,6 +10,14 @@
 
 [目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
 
+## 网页交互实验
+
+除了自己跑仓库里的 Python 代码，如果你暂时不想配环境，也可以直接点开我公开的 10 个网页交互实验。不用写代码，自己抛抛硬币、玩几局三门问题、拖一拖散点，就能看见数字和图形怎么变。买了纸质书的读者，随书会有更完整的配套实验和视频。
+
+[抛硬币：次数多了会怎样？](https://wuchen2018.pages.dev/readers/probability/large-numbers/?from=public) · [三门问题：你换不换门？](https://wuchen2018.pages.dev/readers/probability/monty-hall/?from=public)
+
+[查看实验目录（10 个）](https://wuchen2018.pages.dev/experiments/probability/)
+
 ## 这本书是怎么讲的
 
 我自学概率论的时候，最怕的就是教材跳步。公式明明每一行都看得懂，上一行怎么变成下一行的，却要自己琢磨很久，有时候琢磨半天也想不通，只好先背下来。所以写这本书时，我给自己定了一个要求：**用大白话讲，不跳步**。每写一段，我都会想，读者读到这里会不会卡住？如果会，那就多写几句。书因此厚了一些，但我宁愿多说一句，也不想让你卡在我省掉的那一步上。
