@@ -8,7 +8,7 @@
 
 这是一本概率论与数理统计教材，全书一册，700 多页，适合自学。我在前言里写过，想写一本“像学长坐在你身旁，把思路娓娓道来的教材”。这个仓库放着完整目录、两篇前言、十份样章和Python代码，你可以先读几页，看看这样的讲法适不适合你。
 
-[目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
+[目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [网页交互实验](#网页交互实验) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
 
 ## 这本书是怎么讲的
 
