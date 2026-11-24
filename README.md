@@ -58,9 +58,9 @@
 
 除了自己跑仓库里的 Python 代码，如果你暂时不想配环境，也可以直接点开我公开的 10 个网页交互实验。不用写代码，自己抛抛硬币、玩几局三门问题、拖一拖散点，就能看见数字和图形怎么变。买了纸质书的读者，随书会有更完整的配套实验和视频。
 
-[抛硬币：次数多了会怎样？](https://wuchen2018.pages.dev/readers/probability/large-numbers/?from=public) · [三门问题：你换不换门？](https://wuchen2018.pages.dev/readers/probability/monty-hall/?from=public)
+[抛硬币：次数多了会怎样？](https://wuchen2018.github.io/probability-book/experiments/?topic=large-numbers) · [三门问题：你换不换门？](https://wuchen2018.github.io/probability-book/experiments/?topic=monty-hall)
 
-[查看实验目录（10 个）](https://wuchen2018.pages.dev/experiments/probability/)
+[查看实验目录（10 个）](https://wuchen2018.github.io/probability-book/experiments/)
 
 ## 适合谁读
 
