@@ -8,7 +8,7 @@
 
 这是一本概率论与数理统计教材，全书一册，700 多页，适合自学。我在前言里写过，想写一本“像学长坐在你身旁，把思路娓娓道来的教材”。这个仓库放着完整目录、两篇前言、十份样章和Python代码，你可以先读几页，看看这样的讲法适不适合你。
 
-[目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [网页交互实验](#网页交互实验) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
+[目录](#目录) · [前言](#前言) · [样章](#样章) · [Python代码](code/) · [网页交互实验](#网页交互实验) · [教学视频](#教学视频) · [我为什么写这本书](https://wuchen2018.pages.dev/articles/why-probability-book.html)
 
 ## 这本书是怎么讲的
 
@@ -61,6 +61,12 @@
 [抛硬币：次数多了会怎样？](https://wuchen2018.github.io/probability-book/experiments/?topic=large-numbers) · [三门问题：你换不换门？](https://wuchen2018.github.io/probability-book/experiments/?topic=monty-hall)
 
 [查看实验目录（10 个）](https://wuchen2018.github.io/probability-book/experiments/)
+
+## 教学视频
+
+另外公开了10集配套动画视频，从两枚硬币、骰子和具体数据讲起，跟着画面一步步看推算。
+
+[观看教学视频（10集）](https://wuchen2018.github.io/probability-book/experiments/#videos)
 
 ## 适合谁读
 
