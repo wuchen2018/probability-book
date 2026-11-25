@@ -56,11 +56,11 @@
 
 ## 网页交互实验
 
-《大白话概率论》的34个网页交互实验已经全部公开。不用安装软件，也不用写代码，打开网页就能改参数，观察图形和计算结果怎样变化。这些演示可以配合书中的系统讲解和推导使用。
+《看得见的概率论》是独立的开源交互学习项目，包含39个实验和1个医院补充例子。不用安装软件，也不用写代码，可以直接在线操作，也可以下载后离线使用。各实验保留《大白话概率论》的对应章节和样章说明。
 
-[抛硬币：次数多了会怎样？](https://wuchen2018.github.io/probability-book/experiments/?topic=large-numbers) · [三门问题：你换不换门？](https://wuchen2018.github.io/probability-book/experiments/?topic=monty-hall)
+[看得见的概率论 · 在线体验](https://wuchen2018.github.io/visual-probability/) · [查看项目源码](https://github.com/wuchen2018/visual-probability)
 
-[查看全部34个交互实验](https://wuchen2018.github.io/probability-book/experiments/)
+原来的[图书配套目录](https://wuchen2018.github.io/probability-book/experiments/)继续保留，书中的配套资料入口照常使用。
 
 ## 教学视频
 
